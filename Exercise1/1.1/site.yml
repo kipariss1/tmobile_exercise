@@ -18,10 +18,9 @@
 
     - name: Install Python dependencies for apt module
       ansible.builtin.apt:
-        name:
-          - python3-cffi
-          - python3-cryptography
-        state: present
+        ansible.builtin.shell: |
+          apt-get update
+          apt-get install -y python3-cffi python3-cryptography
         update_cache: true
       become: true
 
