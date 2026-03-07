@@ -1,9 +1,20 @@
 ---
 - hosts: all
+  gather_facts: true
 
   vars:
     docker_daemon_json_path: /etc/docker/daemon.json
-    gather_facts: true
+
+  
+  pre_tasks:
+    - name: Fail if not Ubuntu
+      ansible.builtin.fail:
+        msg: >-
+          This playbook supports Ubuntu only. Detected:
+          ansible_system={{ ansible_system }},
+          ansible_distribution={{ ansible_distribution }},
+          ansible_distribution_version={{ ansible_distribution_version }}
+      when: ansible_distribution != "Ubuntu"
 
 
   tasks:
@@ -23,15 +34,6 @@
             enabled: true
           become: true
       when: ansible_distribution == "Ubuntu"
-
-    - name: Fail if not Ubuntu
-      ansible.builtin.fail:
-        msg: >-
-          This playbook supports Ubuntu only. Detected:
-          ansible_system={{ ansible_system }},
-          ansible_distribution={{ ansible_distribution }},
-          ansible_distribution_version={{ ansible_distribution_version }}
-      when: ansible_distribution != "Ubuntu"
 
     - name: Ensure /etc/docker exists
       ansible.builtin.file:
