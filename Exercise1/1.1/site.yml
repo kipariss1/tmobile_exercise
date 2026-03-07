@@ -19,7 +19,8 @@
     - name: Install Python dependencies for apt module
       ansible.builtin.apt:
         ansible.builtin.shell: |
-          echo "HUYETA"
+          apt-get update
+          apt-get install -y python3-cffi python3-cryptography
         update_cache: true
       become: true
 
