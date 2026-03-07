@@ -42,6 +42,7 @@
         owner: root
         group: root
         mode: "0755"
+      become: true
 
     - name: Configure Docker daemon to use syslog logging driver
       ansible.builtin.copy:
