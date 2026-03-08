@@ -39,7 +39,6 @@
         path: /etc/docker
         state: directory
         owner: root
-        group: root
         mode: "0755"
       become: true
 
@@ -47,7 +46,6 @@
       ansible.builtin.copy:
         dest: "{{ docker_daemon_json_path }}"
         owner: root
-        group: root
         mode: "0644"
         content: |
           {
