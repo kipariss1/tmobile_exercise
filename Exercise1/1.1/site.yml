@@ -54,6 +54,7 @@
             "log-driver": "syslog"
           }
       notify: Restart docker hook
+      become: true
 
     - name: Enable and start Docker service
       ansible.builtin.service:
